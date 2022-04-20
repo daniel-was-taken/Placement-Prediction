@@ -1,0 +1,54 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+<html>
+<body>
+	<h3>Placement Prediction Form</h3>
+
+<div class = "box">
+<div class = "items">
+<form action="/result" method="POST">
+
+<div class="age">
+	<label for="age">Age</label>
+	<input type="text" id="age" name="age" required="true">
+
+</div>   
+<div class="gender">  
+	<label for="gender">Gender</label>
+    <select id = "gender" name="gender">
+        <option value="0">Female</option>
+        <option value="1">Male</option>
+    </select>
+	
+</div>
+<div class = "stream">	
+<label for="stream">Stream</label>
+    <select id = "stream" name="stream">
+        <option value="0">Electronics And Communication</option>
+        <option value="1">Computer Science</option>
+        <option value="2">Information Technology</option>
+        <option value="3">Mechanical</option>
+        <option value="4">Electrical</option>
+        <option value="5">Civil</option>
+    </select>
+    
+</div>
+<div class = "internships">
+	<label for="internships">Internships</label>
+	<input type="text" id="internships" name="internships" required="true">
+    
+</div>
+<div class = "cgpa">	
+	<label for="cgpa">CGPA</label>
+	<input type="text" id="cgpa" name="cgpa" required="true">
+   
+</div>
+<div class = "hbacklog">	
+	<label for="hbacklog">History of Backlogs</label>
+	<input type="text" id="hbacklog" name="hbacklog" required="true">
+</div>
+	<input type="submit" name="username" placeholder="user-name" value="Submit">
+</form>
+</div>
+</div>
+</body>
+</html>
