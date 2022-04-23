@@ -1,6 +1,9 @@
+import imp
 from tkinter.tix import Tree
 from unicodedata import name
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, session, url_for, flash
+from flask_mysqldb import MySQL
+import MySQLdb
 import numpy as np
 import pickle
 
@@ -8,8 +11,66 @@ loaded_model = pickle.load(open("placement.pkl", "rb"))
 
 app = Flask(__name__)
 
-@app.route("/")
+app.secret_key = "12345"
+
+app.config["MYSQL_HOST"] = "localhost"
+app.config["MYSQL_USER"] = "root"
+app.config["MYSQL_PASSWORD"] = "admin"
+app.config["MYSQL_DB"] = "login"
+
+db = MySQL(app)
+
+@app.route("/", methods= ['GET', 'POST'])
 def index():
+    if request.method == 'POST':
+        if 'email' in request.form and 'password' in request.form:
+            username = request.form['email']
+            password = request.form['password']
+            cursor = db.connection.cursor(MySQLdb.cursors.DictCursor)
+            cursor.execute("SELECT * FROM logininfo WHERE email=%s AND password=%s",(username,password))
+            info = cursor.fetchone()
+            print(info)
+            if info is not None:
+                if info['email'] == username and info['password'] == password:
+                    session['loginsuccess'] = True
+                    return redirect(url_for('profile'))
+            else:
+                return redirect(url_for('index'))
+
+    return render_template("login.html")
+
+@app.route('/register')
+def new_user1():
+    return render_template("register.html")
+
+@app.route('/new', methods=['GET','POST'])
+def new_user():
+    if request.method == 'POST':
+      if "name" in request.form and "email" in request.form and "password" in request.form:
+          name = request.form['name']  
+          username = request.form['email'] #email
+          password = request.form['password']  
+          cur = db.connection.cursor(MySQLdb.cursors.DictCursor)
+          cur.execute("INSERT INTO login.logininfo (name,email,password) VALUES (%s,%s,%s)",(name,username,password))
+          db.connection.commit()
+          return redirect(url_for('index'))
+
+    return render_template('register.html')
+
+@app.route('/new/profile')
+def profile():
+    if session['loginsuccess'] == True:
+        return render_template('profile.html')
+    
+
+@app.route('/new/logout')
+def logout():
+    session.pop('loginsuccess', None)
+    return redirect(url_for('index'))
+
+
+@app.route('/index')
+def toPredict():
     return render_template("index.html")
 
 

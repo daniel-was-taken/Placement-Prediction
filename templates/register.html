@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+</head>
+<body>
+    <h3>Placement Prediction Registration</h3>
+    <div class = "box">
+        <div class = "items">
+        <form action="/new" method="POST">
+            <div class="name">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Write your name" required="true">
+            </div> 
+            <div class="email">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Write your email" required="true">
+            </div> 
+            <div class="password">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Write your password" required="true">
+            </div> 
+            <input type="submit" value="CREATE USER">
+        </form>
+      </div>      
+    </div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <h3>Placement Prediction Login</h3>
+    <div class = "box">
+        <div class = "items">
+        <form action="" method="POST">
+            <div class="email">
+                <label for="email">Email</label>
+                <input name="email" type="email" placeholder="Write your email" required="true">
+            </div> 
+            <div class="password">
+                <label for="password">Password</label>
+                <input name="password" type="password" placeholder="Write your password" required="true">
+            </div> 
+            <input type="submit" value="LOGIN">
+        </form>
+            <div class = "register">
+            <form action="/register">
+                <label for="newhere">New here?</label>
+                <input value="Register" type="submit">
+            </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

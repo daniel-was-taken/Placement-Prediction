@@ -1,19 +1,18 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 <html>
    <body>
-    <h3>Placement Prediction Result</h3>
-    <center>
-    <div class = "box">
+    <h3>Placement Prediction Result</h3>    
+    <div class = "box">      
      <h3>The chances of you being placed are
       {% if (data == 1): %} 
           higher
       {% else %} 
           lower
-      {% endif %}
-     <br>
+      {% endif %}    
      </h3>
-     <a href="/"><input type="button" value="Click to Go Home"></a> 
+     <div class = "items">
+        <a href="/new/profile"><input type="button" value="Click to Go Home"></a> 
+     </div> 
     </div>
-    </center>
    </body>
 </html>
