@@ -28,13 +28,13 @@ def index():
             username = request.form['email']
             password = request.form['password']
             cursor = db.connection.cursor(MySQLdb.cursors.DictCursor)
-            cursor.execute("SELECT * FROM logininfo WHERE email=%s AND password=%s",(username,password))
+            cursor.execute("SELECT * FROM auth WHERE email=%s AND password=%s",(username,password))
             info = cursor.fetchone()
             print(info)
             
             if info is not None:
                 if info['email'] == username and info['password'] == password:
-                    pinfo = cursor.execute("SELECT name FROM logininfo WHERE email=%s AND password=%s",(username,password))          
+                    pinfo = cursor.execute("SELECT name FROM auth WHERE email=%s AND password=%s",(username,password))          
                     pinfo = cursor.fetchone()
                     print(pinfo)
                     names = pinfo['name']     
@@ -90,7 +90,7 @@ def new_user():
           username = request.form['email'] #email
           password = request.form['password']  
           cur = db.connection.cursor(MySQLdb.cursors.DictCursor)
-          cur.execute("INSERT INTO login.logininfo (name,email,password) VALUES (%s,%s,%s)",(name,username,password))
+          cur.execute("INSERT INTO login.auth (name,email,password) VALUES (%s,%s,%s)",(name,username,password))
           db.connection.commit()
           return redirect(url_for('index'))
 
